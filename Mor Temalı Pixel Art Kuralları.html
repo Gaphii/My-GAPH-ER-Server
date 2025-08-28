@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAPHİER | Sanatçı Platformu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6A0DAD;
+            --secondary: #8A2BE2;
+            --accent: #FF00FF;
+            --dark: #1A1A2E;
+            --light: #F5F5F5;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--dark) 0%, #16213E 100%);
+            color: var(--light);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--secondary);
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 2.8rem;
+        }
+        
+        /* Language Switcher */
+        .language-switcher {
+            position: relative;
+        }
+        
+        .language-btn {
+            background: rgba(106, 13, 173, 0.3);
+            border: 2px solid var(--secondary);
+            color: var(--light);
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+        
+        .language-btn:hover {
+            background: rgba(106, 13, 173, 0.5);
+        }
+        
+        .language-btn i {
+            margin-left: 8px;
+        }
+        
+        .language-options {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--dark);
+            border: 2px solid var(--secondary);
+            border-radius: 10px;
+            margin-top: 10px;
+            width: 150px;
+            display: none;
+            z-index: 100;
+            overflow: hidden;
+        }
+        
+        .language-options.show {
+            display: block;
+        }
+        
+        .language-option {
+            padding: 12px 15px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .language-option:hover {
+            background: rgba(106, 13, 173, 0.3);
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 60px 0;
+            margin-bottom: 50px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: #ccc;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--accent), var(--secondary));
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(138, 43, 226, 0.5);
+        }
+        
+        /* Rules Section */
+        .rules-section {
+            background: rgba(26, 26, 46, 0.7);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--secondary);
+        }
+        
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .rule-card {
+            background: rgba(106, 13, 173, 0.15);
+            border-radius: 15px;
+            padding: 25px;
+            transition: var(--transition);
+            border: 1px solid rgba(138, 43, 226, 0.3);
+        }
+        
+        .rule-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.2);
+            border-color: var(--secondary);
+        }
+        
+        .rule-card i {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+        
+        .rule-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--light);
+        }
+        
+        .rule-card p {
+            color: #ccc;
+        }
+        
+        /* Gallery Section */
+        .gallery-section {
+            margin-bottom: 50px;
+        }
+        
+        .art-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .art-item {
+            height: 250px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .art-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .art-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .art-item-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 20px;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .art-item:hover .art-item-overlay {
+            opacity: 1;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 2px solid var(--secondary);
+            margin-top: 50px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(106, 13, 173, 0.3);
+            color: var(--light);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-5px);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .rules-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .art-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-palette"></i>
+                GAPHİER
+            </div>
+            
+            <div class="language-switcher">
+                <div class="language-btn">
+                    Türkçe <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="language-options">
+                    <div class="language-option" data-lang="tr">Türkçe</div>
+                    <div class="language-option" data-lang="en">English</div>
+                    <div class="language-option" data-lang="de">Deutsch</div>
+                    <div class="language-option" data-lang="fr">Français</div>
+                </div>
+            </div>
+        </header>
+        
+        <section class="hero">
+            <h1>Sanatın ve Tasarımın Buluşma Noktası</h1>
+            <p>GAPHİER, dünyanın dört bir yanındaki yetenekli sanatçıları bir araya getiren, ilham verici bir topluluk platformudur.</p>
+            <a href="#" class="cta-button">Hemen Katıl</a>
+        </section>
+        
+        <section class="rules-section">
+            <h2 class="section-title">Topluluk Kuralları</h2>
+            
+            <div class="rules-grid">
+                <div class="rule-card">
+                    <i class="fas fa-heart"></i>
+                    <h3>Saygılı Olun</h3>
+                    <p>Tüm üyelere karşı daima saygılı ve kibar davranın. Eleştirileriniz yapıcı olsun.</p>
+                </div>
+                
+                <div class="rule-card">
+                    <i class="fas fa-paint-brush"></i>
+                    <h3>Özgün İçerik</h3>
+                    <p>Yalnızca kendi çalışmalarınızı veya paylaşım izni olan içerikleri paylaşın.</p>
+                </div>
+                
+                <div class="rule-card">
+                    <i class="fas fa-lock"></i>
+                    <h3>Gizliliğe Saygı</h3>
+                    <p>Başkalarının kişisel bilgilerini izinsiz paylaşmayın ve gizliliğine saygı gösterin.</p>
+                </div>
+                
+                <div class="rule-card">
+                    <i class="fas fa-star"></i>
+                    <h3>Kalite Standartları</h3>
+                    <p>Paylaşımlarınızın kaliteli ve topluluk kurallarına uygun olduğundan emin olun.</p>
+                </div>
+                
+                <div class="rule-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Topluluk Ruhu</h3>
+                    <p>Diğer sanatçıları destekleyin, olumlu geri bildirimlerde bulunun.</p>
+                </div>
+                
+                <div class="rule-card">
+                    <i class="fas fa-ban"></i>
+                    <h3>Yasaklı İçerik</h3>
+                    <p>Nefret söylemi, cinsel taciz veya şiddet içeren içerikler kesinlikle yasaktır.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="gallery-section">
+            <h2 class="section-title">Topluluktan Örnekler</h2>
+            
+            <div class="art-grid">
+                <div class="art-item">
+                    <img src="https://picsum.photos/seed/1/600/600" alt="Sanat Eseri">
+                    <div class="art-item-overlay">
+                        <h3>Renk Dansı</h3>
+                        <p>@serra</p>
+                    </div>
+                </div>
+                
+                <div class="art-item">
+                    <img src="https://picsum.photos/seed/2/600/600" alt="Sanat Eseri">
+                    <div class="art-item-overlay">
+                        <h3>Gece Işıkları</h3>
+                        <p>@burak</p>
+                    </div>
+                </div>
+                
+                <div class="art-item">
+                    <img src="https://picsum.photos/seed/3/600/600" alt="Sanat Eseri">
+                    <div class="art-item-overlay">
+                        <h3>Soyut Düşler</h3>
+                        <p>@zeynep</p>
+                    </div>
+                </div>
+                
+                <div class="art-item">
+                    <img src="https://picsum.photos/seed/4/600/600" alt="Sanat Eseri">
+                    <div class="art-item-overlay">
+                        <h3>Doğanın Uyumu</h3>
+                        <p>@emre</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-discord"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p>© 2023 GAPHİER - Tüm Hakları Saklıdır</p>
+        </footer>
+    </div>
+
+    <script>
+        // Dil değiştirme işlevselliği
+        document.addEventListener('DOMContentLoaded', function() {
+            const languageBtn = document.querySelector('.language-btn');
+            const languageOptions = document.querySelector('.language-options');
+            
+            languageBtn.addEventListener('click', function() {
+                languageOptions.classList.toggle('show');
+            });
+            
+            // Dil seçeneklerine tıklama
+            document.querySelectorAll('.language-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const selectedLang = this.getAttribute('data-lang');
+                    languageBtn.innerHTML = this.textContent + ' <i class="fas fa-chevron-down"></i>';
+                    languageOptions.classList.remove('show');
+                    
+                    // Burada seçilen dile göre içerikleri değiştirebilirsiniz
+                    console.log('Seçilen dil: ' + selectedLang);
+                    
+                    // Dil değişimi bildirimi
+                    alert(`Dil ${this.textContent} olarak değiştirildi!`);
+                });
+            });
+            
+            // Dışarı tıklandığında dil seçeneklerini kapat
+            document.addEventListener('click', function(e) {
+                if (!languageBtn.contains(e.target) && !languageOptions.contains(e.target)) {
+                    languageOptions.classList.remove('show');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
